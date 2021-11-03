@@ -1,12 +1,25 @@
-#https://www.cours-gratuit.com/tutoriel-python/tutoriel-python-comment-crer-un-jeu-avec-pygame#_Toc56681375
+#https://pythonprogramming.net/pygame-python-3-part-1-intro/
 import pygame
+
 pygame.init()
-(largeur, hauteur) = (300, 500)
-screen = pygame.display.set_mode((largeur, hauteur))
-pygame.display.set_caption('Votre première fenêtre pygame ')
-pygame.display.update()
-running = True
-while True:
+
+gameDisplay = pygame.display.set_mode((800,600))
+pygame.display.set_caption('A bit Racey')
+
+clock = pygame.time.Clock()
+
+crashed = False
+
+while not crashed:
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            crashed = True
+
+        print(event)
+
+    pygame.display.update()
+    clock.tick(60)
+
+pygame.quit()
+quit()
