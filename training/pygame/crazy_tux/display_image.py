@@ -13,14 +13,14 @@ red = (255,0,0)
 
 block_color = (53,115,255)
 
-car_width = 73
+tux_width = 73
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption('A bit Racey')
+pygame.display.set_caption('Crazy TUX')
 clock = pygame.time.Clock()
 
-carImg = pygame.image.load('tux.png')
-
+tuxImg = pygame.image.load('tux.png')
+windowsImage = pygame.image.load('windows.png')
 
 def things_dodged(count):
     font = pygame.font.SysFont(None, 25)
@@ -28,17 +28,18 @@ def things_dodged(count):
     gameDisplay.blit(text,(0,0))
 
 def things(thingx, thingy, thingw, thingh, color):
-    pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
+     gameDisplay.blit(windowsImage,[thingx, thingy, thingw, thingh])
+    
 
 def car(x,y):
-    gameDisplay.blit(carImg,(x,y))
+    gameDisplay.blit(tuxImg,(x,y))
 
 def text_objects(text, font):
     textSurface = font.render(text, True, black)
     return textSurface, textSurface.get_rect()
 
 def message_display(text):
-    largeText = pygame.font.Font('freesansbold.ttf',115)
+    largeText = pygame.font.Font('freesansbold.ttf',40)
     TextSurf, TextRect = text_objects(text, largeText)
     TextRect.center = ((display_width/2),(display_height/2))
     gameDisplay.blit(TextSurf, TextRect)
@@ -52,7 +53,7 @@ def message_display(text):
     
 
 def crash():
-    message_display('You Crashed')
+    message_display('You have been commercialized')
     
 def game_loop():
     x = (display_width * 0.45)
@@ -62,11 +63,11 @@ def game_loop():
 
     thing_startx = random.randrange(0, display_width)
     thing_starty = -600
-    thing_speed = 4
+    thing_speed = 6
     thing_width = 100
     thing_height = 100
 
-    thingCount = 1
+
 
     dodged = 0
 
@@ -101,7 +102,7 @@ def game_loop():
         car(x,y)
         things_dodged(dodged)
 
-        if x > display_width - car_width or x < 0:
+        if x > display_width - tux_width or x < 0:
             crash()
 
         if thing_starty > display_height:
@@ -114,7 +115,7 @@ def game_loop():
         if y < thing_starty+thing_height:
             print('y crossover')
 
-            if x > thing_startx and x < thing_startx + thing_width or x+car_width > thing_startx and x + car_width < thing_startx+thing_width:
+            if x > thing_startx and x < thing_startx + thing_width or x+tux_width > thing_startx and x + tux_width < thing_startx+thing_width:
                 print('x crossover')
                 crash()
         
